@@ -91,11 +91,8 @@ jobs:
 
   aarch64_build:
     strategy:
-      matrix:
-        pyver: [ '3.6', '3.7', '3.8', '3.9' ]
       fail-fast: false
     env:
-      py: python${{ matrix.pyver }}
       GOPATH: ${{ github.workspace }}
       GO111MODULE: auto
       CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
@@ -121,11 +118,7 @@ jobs:
       run: |
             docker run --rm -v ${{ github.workspace }}:/io:rw --workdir=/io \
             arm64v8/ubuntu \
-            bash -exc 'apt-get update && \
-            apt install software-properties-common -y && \
-            add-apt-repository ppa:deadsnakes/ppa -y && \
-            apt install -y ${{ env.py }} && \
-            arch=$(go env GOARCH) && \
+            bash -exc 'arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
             curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
             sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
