@@ -119,5 +119,5 @@ jobs:
             make build && \
             make test && \
             echo $(git status --porcelain | grep generated) && \
-            if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use 'make build' to update openapi"; exit 1; fi && \
+            if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use make build to update openapi"; exit 1; fi && \
             bash <(curl -s https://codecov.io/bash)'
