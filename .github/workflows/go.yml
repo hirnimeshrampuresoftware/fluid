@@ -111,7 +111,10 @@ jobs:
       run: |
             docker run --rm -v ${{ github.workspace }}:/io:rw --workdir=/io \
             arm64v8/ubuntu \
-            bash -exc 'arch=$(go env GOARCH) && \
+            bash -exc 'rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.4.linux-arm64.tar.gz && \
+            export PATH=$PATH:/usr/local/go/bin && \
+            go version && \
+            arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
             curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
             sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
