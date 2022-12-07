@@ -88,3 +88,50 @@ jobs:
         echo $(git status --porcelain | grep generated)
         if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use 'make build' to update openapi"; exit 1; fi
         bash <(curl -s https://codecov.io/bash)
+
+  aarch64_build:
+    strategy:
+      matrix:
+        pyver: [ '3.6', '3.7', '3.8', '3.9' ]
+      fail-fast: false
+    env:
+      py: python${{ matrix.pyver }}
+      GOPATH: ${{ github.workspace }}
+      GO111MODULE: auto
+      CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
+    defaults:
+      run:
+        working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17    
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up QEMU        
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - uses: actions/download-artifact@v2
+      with:
+        name: manylinux_aarch64_wheels
+        path: dist
+    - name: Test Wheels
+      run: |
+            docker run --rm -v ${{ github.workspace }}:/io:rw --workdir=/io \
+            arm64v8/ubuntu \
+            bash -exc 'apt-get update && \
+            apt install software-properties-common -y && \
+            add-apt-repository ppa:deadsnakes/ppa -y && \
+            apt install -y ${{ env.py }} && \
+            arch=$(go env GOARCH) && \
+            os=$(go env GOOS) && \
+            curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
+            sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
+            export PATH=$PATH:/usr/local/kubebuilder/bin && \
+            make build && \
+            make test && \
+            echo $(git status --porcelain | grep generated) && \
+            if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use 'make build' to update openapi"; exit 1; fi && \
+            bash <(curl -s https://codecov.io/bash)'
