@@ -120,7 +120,7 @@ jobs:
             bash -exc 'apt-get update && \
             apt-get install -y curl golang-go make && \
             #export PATH=$PATH:/usr/local/go/bin && \
-            cat ~/.bashrc && \
+            go env && \
             go version && \
             arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
