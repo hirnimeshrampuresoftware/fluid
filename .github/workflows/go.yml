@@ -93,7 +93,7 @@ jobs:
     strategy:
       fail-fast: false
     env:
-      GOPATH: /root/go
+      GOPATH: ${{ github.workspace }}
       GO111MODULE: auto
       CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
     defaults:
@@ -119,9 +119,9 @@ jobs:
             arm64v8/ubuntu \
             bash -exc 'apt-get update && \
             apt-get install -y curl golang-go make && \
-            #export PATH=$PATH:/usr/local/go/bin && \
             go env && \
-            export GOPATH=/root/go && \
+            cp /root/go ${{ github.workspace }} && \
+            export GOPATH=${{ github.workspace }} && \
             export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
             arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
