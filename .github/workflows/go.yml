@@ -98,9 +98,9 @@ jobs:
       GOPATH: ${{ github.workspace }}
       GO111MODULE: auto
       CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
-    defaults:
-      run:
-        working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid      
+#    defaults:
+ #     run:
+  #      working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid      
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
