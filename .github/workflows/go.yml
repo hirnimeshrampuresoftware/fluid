@@ -120,7 +120,7 @@ jobs:
             bash -exc 'apt-get update && \
             apt-get install -y curl golang-go make && \
             go env && \
-            cp /root/go ${{ github.workspace }} && \
+            find / -name 'go' && \
             export GOPATH=${{ github.workspace }} && \
             export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
             arch=$(go env GOARCH) && \
