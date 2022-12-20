@@ -121,7 +121,7 @@ jobs:
             arm64v8/ubuntu \
             bash -exc 'apt-get update && \
             pwd && \
-            apt-get install -y curl golang-go make && \
+            apt-get install -y curl golang-go make git && \
             go env && \
             find / -name 'go' && \
             export GOPATH=/root/go && \
