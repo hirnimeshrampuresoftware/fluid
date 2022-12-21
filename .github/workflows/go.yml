@@ -134,6 +134,7 @@ jobs:
             mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
             export PATH=$PATH:/usr/local/kubebuilder/bin && \
             make build && \
+            export KUBE_CONFIG_PATH=~/.kube/config && \
             make test && \
             echo $(git status --porcelain | grep generated) && \
             if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use make build to update openapi"; exit 1; fi && \
