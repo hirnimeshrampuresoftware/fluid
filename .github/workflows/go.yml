@@ -112,23 +112,19 @@ jobs:
       #with:
        # path: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
       
-    - name: Set up QEMU        
-      id: qemu
-      uses: docker/setup-qemu-action@v1
     - name: build
       run: |
-            apt-get update && \
-            apt-get install -y curl golang-go make git && \
-            go env && \
+            sudo apt-get update && \
+            sudo apt-get install -y curl golang-go make git && \
             export GOPATH=/root/go && \
             export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
             mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
             cd $GOPATH/src/github.com/fluid-cloudnative && \
-            git clone https://github.com/fluid-cloudnative/fluid.git && \
+            sudo git clone https://github.com/fluid-cloudnative/fluid.git && \
             cd fluid && \
             arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
-            curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
+            sudo curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
             mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
             export PATH=$PATH:/usr/local/kubebuilder/bin && \
             make build && \
