@@ -53,43 +53,43 @@ jobs:
           go vet ./...
           find ./charts | grep Chart.yaml | xargs dirname | xargs helm lint
 
-#   build:
-#     env:
-#       GOPATH: ${{ github.workspace }}
-#       GO111MODULE: auto
-#       CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
-#     defaults:
-#       run:
-#         working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Set up Go
-#       uses: actions/setup-go@v2
-#       with:
-#         go-version: 1.17
+  build:
+    env:
+      GOPATH: ${{ github.workspace }}
+      GO111MODULE: auto
+      CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
+    defaults:
+      run:
+        working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
     
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-#       with:
-#         path: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid
 
-#     - name: CI Preparation
-#       run: |
-#         pwd
-#         arch=$(go env GOARCH)
-#         os=$(go env GOOS)
-#         curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/
-#         sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder
-#         export PATH=$PATH:/usr/local/kubebuilder/bin
+    - name: CI Preparation
+      run: |
+        pwd
+        arch=$(go env GOARCH)
+        os=$(go env GOOS)
+        curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/
+        sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder
+        export PATH=$PATH:/usr/local/kubebuilder/bin
 
-#     - name: CI script
-#       run: |
-#         pwd
-#         make build
-#         make test
-#         echo $(git status --porcelain | grep generated)
-#         if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use 'make build' to update openapi"; exit 1; fi
-#         bash <(curl -s https://codecov.io/bash)
+    - name: CI script
+      run: |
+        pwd
+        make build
+        make test
+        echo $(git status --porcelain | grep generated)
+        if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use 'make build' to update openapi"; exit 1; fi
+        bash <(curl -s https://codecov.io/bash)
 
   aarch64_build:
     strategy:
@@ -106,7 +106,7 @@ jobs:
       - name: build
         run: |
               sudo apt-get install -y curl golang-go make git && \
-              export GOROOT=/usr/lib/go
+              export GOROOT=/usr/lib/go && \
               export GOPATH=/root/go && \
               export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
               go env && \
