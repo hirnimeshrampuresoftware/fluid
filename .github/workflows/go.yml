@@ -114,7 +114,6 @@ jobs:
             export GOPATH=/root/go && \
             export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
             go env && \
-            which go && \
             pwd && \
             #sudo mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
             #sudo cd $GOPATH/src/github.com/fluid-cloudnative && \
@@ -122,7 +121,7 @@ jobs:
             #sudo cd fluid && \
             arch=$(go env GOARCH) && \
             os=$(go env GOOS) && \
-            cd /home/hirni/actions-runner/_work/fluid/fluid && \
+            cd /home/hirni/go/actions-runner/_work/fluid/fluid && \
             sudo curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
             sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
             export PATH=$PATH:/usr/local/kubebuilder/bin && \
