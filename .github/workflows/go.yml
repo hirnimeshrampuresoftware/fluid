@@ -101,7 +101,7 @@ jobs:
 #    defaults:
  #     run:
   #      working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid      
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Set up Go
       uses: actions/setup-go@v2
@@ -117,9 +117,7 @@ jobs:
       uses: docker/setup-qemu-action@v1
     - name: build
       run: |
-            docker run --rm -v ${{ github.workspace }}:/io:rw --workdir=/io \
-            arm64v8/ubuntu \
-            bash -exc 'apt-get update && \
+            apt-get update && \
             apt-get install -y curl golang-go make git && \
             go env && \
             export GOPATH=/root/go && \
@@ -138,4 +136,4 @@ jobs:
             make test && \
             echo $(git status --porcelain | grep generated) && \
             if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use make build to update openapi"; exit 1; fi && \
-            bash <(curl -s https://codecov.io/bash)'
+            bash <(curl -s https://codecov.io/bash)
