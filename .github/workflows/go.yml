@@ -113,6 +113,10 @@ jobs:
             sudo apt-get install -y curl golang-go make git && \
             export GOPATH=/root/go && \
             export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
+            go env && \
+            which go && \
+            find / -name 'go' && \
+            pwd && \
             sudo mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
             sudo cd $GOPATH/src/github.com/fluid-cloudnative && \
             sudo git clone https://github.com/fluid-cloudnative/fluid.git && \
