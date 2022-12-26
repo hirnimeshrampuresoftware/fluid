@@ -110,19 +110,18 @@ jobs:
       - name: build
         run: |
               sudo apt-get install -y curl golang-go make git && \
-              export GOROOT=/usr/lib/go && \
+              #export GOROOT=/usr/lib/go && \
               export GOPATH=/home/hirni/actions-runner/_work/go && \
               export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
               go env && \
               pwd && \
               sudo su && \
-              mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
-              cd $GOPATH/src/github.com/fluid-cloudnative && \
-              git clone https://github.com/fluid-cloudnative/fluid.git && \
-              cd fluid && \
+              #mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
+              #cd $GOPATH/src/github.com/fluid-cloudnative && \
+              #git clone https://github.com/fluid-cloudnative/fluid.git && \
+              cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               arch=$(go env GOARCH) && \
               os=$(go env GOOS) && \
-              #cd /home/hirni/go/actions-runner/_work/fluid/fluid && \
               #sudo curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
               #sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
               export PATH=$PATH:/usr/local/kubebuilder/bin && \
