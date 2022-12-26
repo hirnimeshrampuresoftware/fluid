@@ -116,8 +116,8 @@ jobs:
               go env && \
               pwd && \
               sudo su && \
-              #mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
-              #cd $GOPATH/src/github.com/fluid-cloudnative && \
+              mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
+              cd $GOPATH/src/github.com/fluid-cloudnative && \
               git clone https://github.com/fluid-cloudnative/fluid.git && \
               cd fluid && \
               arch=$(go env GOARCH) && \
