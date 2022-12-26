@@ -95,8 +95,8 @@ jobs:
     strategy:
       fail-fast: false
     env:
-      GOPATH: ${{ github.workspace }}
-      GO111MODULE: auto
+#      GOPATH: ${{ github.workspace }}
+ #     GO111MODULE: auto
       CI_TEST_FLAGS: -race -coverprofile=coverage.txt -covermode=atomic
 #     defaults:
 #       run:
