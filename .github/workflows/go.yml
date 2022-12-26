@@ -119,6 +119,7 @@ jobs:
               #mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
               #cd $GOPATH/src/github.com/fluid-cloudnative && \
               #git clone https://github.com/fluid-cloudnative/fluid.git && \
+              chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               arch=$(go env GOARCH) && \
               os=$(go env GOOS) && \
