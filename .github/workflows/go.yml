@@ -107,7 +107,7 @@ jobs:
         run: |
               sudo apt-get install -y curl golang-go make git && \
               export GOROOT=/usr/lib/go && \
-              export GOPATH=/root/go && \
+              export GOPATH=/home/hirni/actions-runner/_work/go && \
               export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
               go env && \
               pwd && \
