@@ -106,36 +106,19 @@ jobs:
       - name: build
         run: |
               sudo apt-get install -y curl golang-go make git && \
-              #export GOROOT=/usr/lib/go && \
               export GOPATH=/home/hirni/actions-runner/_work/go && \
               export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
-              echo $GOPATH && \
-              echo $GOROOT && \
-              go version && \
-              go env && \
-              pwd && \
-              #sudo su && \
-              #mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
-              #cd $GOPATH/src/github.com/fluid-cloudnative && \
-              #git clone https://github.com/fluid-cloudnative/fluid.git && \
-              sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
-              sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/bin/ && \
-              sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/coverage.txt && \
-              #sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/bin/fluidapp-controller && \
-              #sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/api/v1alpha1/openapi_generated.go && \
+              sudo chmod 777 -R /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/ && \
+              #sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/bin/ && \
+              #sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/coverage.txt && \
               cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               git config --global --add safe.directory /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
-              pwd && \
-              echo $GOPATH && \
-              echo $GOROOT && \
               arch=$(go env GOARCH) && \
               os=$(go env GOOS) && \
               #sudo curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
               #sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
               #export PATH=$PATH:/usr/local/kubebuilder/bin && \
-              pwd && \
               make build && \
-              #export KUBE_CONFIG_PATH=~/.kube/config && \
               make test && \
               echo $(git status --porcelain | grep generated) && \
               if [ -z "$(git status --porcelain | grep generated)" ]; then echo "openapi validation passed."; else echo "openapi validation failed. Please use make build to update openapi"; exit 1; fi && \
