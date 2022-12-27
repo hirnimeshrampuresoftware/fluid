@@ -114,7 +114,7 @@ jobs:
               go version && \
               go env && \
               pwd && \
-              sudo su && \
+              #sudo su && \
               #mkdir -p $GOPATH/src/github.com/fluid-cloudnative/ && \
               #cd $GOPATH/src/github.com/fluid-cloudnative && \
               #git clone https://github.com/fluid-cloudnative/fluid.git && \
@@ -129,7 +129,7 @@ jobs:
               #sudo mv /tmp/kubebuilder_2.3.1_${os}_${arch} /usr/local/kubebuilder && \
               #export PATH=$PATH:/usr/local/kubebuilder/bin && \
               pwd && \
-              sudo make build && \
+              make build && \
               #export KUBE_CONFIG_PATH=~/.kube/config && \
               make test && \
               echo $(git status --porcelain | grep generated) && \
