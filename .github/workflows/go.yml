@@ -103,16 +103,15 @@ jobs:
 #         working-directory: ${{ env.GOPATH }}/src/github.com/fluid-cloudnative/fluid      
     runs-on: self-hosted
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.17
       - name: build
         run: |
               sudo apt-get install -y curl golang-go make git && \
               #export GOROOT=/usr/lib/go && \
               export GOPATH=/home/hirni/actions-runner/_work/go && \
               export PATH=$PATH:$GOROOT/bin:$GOPATH/bin && \
+              echo $GOPATH && \
+              echo $GOROOT && \
+              go version && \
               go env && \
               pwd && \
               sudo su && \
@@ -122,6 +121,8 @@ jobs:
               sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               pwd && \
+              echo $GOPATH && \
+              echo $GOROOT && \
               arch=$(go env GOARCH) && \
               os=$(go env GOOS) && \
               #sudo curl -L https://github.com/kubernetes-sigs/kubebuilder/releases/download/v2.3.1/kubebuilder_2.3.1_${os}_${arch}.tar.gz | tar -xz -C /tmp/ && \
