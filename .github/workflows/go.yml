@@ -120,8 +120,10 @@ jobs:
               #git clone https://github.com/fluid-cloudnative/fluid.git && \
               sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/bin/dataset-controller && \
+              sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/bin/fluidapp-controller && \
               sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/api/v1alpha1/openapi_generated.go && \
               cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
+              git config --global --add safe.directory /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               pwd && \
               echo $GOPATH && \
               echo $GOROOT && \
