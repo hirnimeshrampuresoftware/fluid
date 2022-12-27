@@ -119,6 +119,7 @@ jobs:
               #cd $GOPATH/src/github.com/fluid-cloudnative && \
               #git clone https://github.com/fluid-cloudnative/fluid.git && \
               sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
+              sudo chmod 777 /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid/api/v1alpha1/openapi_generated.go && \
               cd /home/hirni/actions-runner/_work/go/src/github.com/fluid-cloudnative/fluid && \
               pwd && \
               echo $GOPATH && \
